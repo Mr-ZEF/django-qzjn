@@ -10,9 +10,9 @@ from telegram import __version__ as TG_VER
 
 from django.core.wsgi import get_wsgi_application
 
-sys.path.append('D:\\jupyter\\telegram_web_app\\myproject')
+# sys.path.append('D:\\jupyter\\telegram_web_app\\myproject')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
 
 application = get_wsgi_application()
 
