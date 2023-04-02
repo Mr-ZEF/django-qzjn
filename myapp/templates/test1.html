@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <title>Telegram Web App</title>
+
+    <style>
+      .nav-scroll-container {
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .nav-scroll-container::-webkit-scrollbar {
+        width: 0.25em;
+        height: 0.25em;
+      }
+
+      .nav-scroll-container::-webkit-scrollbar-thumb {
+        background-color: #9cb89d;
+      }
+
+    </style>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+<body>
+     <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #9cb89d;">
+        <div class="container-fluid d-flex flex-nowrap overflow-auto flex-grow-1 justify-content-center"> <!-- Изменения здесь -->
+            <div class="nav-scroll-container">
+                <a class="nav-item nav-link badge badge-info" href="?category='Фрукты'">Категория 1</a>
+                <a class="nav-item nav-link badge badge-info" href="?category=2">Категория 2</a>
+                <a class="nav-item nav-link badge badge-info" href="?category=3">Категория 3</a>
+                <a class="nav-item nav-link badge badge-info" href="?category=4">Категория 4</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 50px; padding-bottom: 85px;"> <!-- Добавлены стили padding-top и padding-bottom -->
+        <div class="row">
+            {% for product in products %}
+                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top" style="background-image: url('{{ product.image.url }}'); aspect-ratio: 1 / 1; background-size: cover; background-position: center;"></div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center mb-2">{{ product.name }}</h5>
+                            <p class="card-text text-center mb-2">{{ product.price }} ₸</p>
+                            <p class="card-text text-center mb-2">Остаток: {{ product.stock }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark btn-decrement" type="button">-</button>
+                                    <input class="form-control form-control-centered" type="text" min="1" max="{{ product.stock }}" value="1">
+                                    <button class="btn btn-dark btn-increment" type="button">+</button>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block btn-add" type="button">Добавить <p></p>в корзину</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="btn-group btn-group-justified fixed-bottom justify-content-around bg-dark" role="group">
+        <a class="btn btn-dark btn-sm" href="{% url 'test' %}" role="button"><p></p><i class="bi bi-house-fill"></i><p></p><p>Домой</p></a>
+        <a class="btn btn-dark btn-sm" href="{% url 'products' %}" role="button"><p></p><i class="bi bi-shop"></i><p></p><p>Магазин</p></a>
+        <a class="btn btn-dark btn-sm" href="{% url 'carts' %}" role="button"><p></p><i class="bi bi-bag-check"></i><p></p><p>Корзина</p></a>
+        <a class="btn btn-dark btn-sm" href="{% url 'orders' %}" role="button"><p></p><i class="bi bi-ui-checks"></i><p></p><p>Заказы</p></a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const incrementButtons = document.querySelectorAll('.btn-increment');
+        const decrementButtons = document.querySelectorAll('.btn-decrement');
+        const numberInputs = document.querySelectorAll('.form-control');
+
+        incrementButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                if (numberInputs[index].value < numberInputs[index].max) {
+                    numberInputs[index].value = parseInt(numberInputs[index].value) + 1;
+                }
+            });
+        });
+
+        decrementButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                if (numberInputs[index].value > numberInputs[index].min) {
+                    numberInputs[index].value = parseInt(numberInputs[index].value) - 1;
+                }
+            });
+        });
+    });
+    </script>
+
+</body>
+</html>

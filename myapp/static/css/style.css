@@ -1,0 +1,51 @@
+body {
+  font-family: 'Press Start 2P', cursive;
+  background-color: #9cb89d;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #6f9870;  
+  color: #C177FF;
+}
+
+.card {
+  transition: 0.3s;
+  background-color: #b89cb7; 
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #986f98;
+}
+
+
+.bg-custom {
+  background-color: #b89cb7; /* Цвет фона */
+}
+
+.custom-card-footer {
+  background-color: transparent;
+  border-top: none;
+}
+
+.form-control-centered {
+  text-align: center;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.btn-add {
+  font-size: 0.8rem; /* уменьшает шрифт кнопки на 2 пункта */
+}

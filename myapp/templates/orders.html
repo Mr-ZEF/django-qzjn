@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block content %}
+<div class="container">
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Дата заказа</th>
+                <th scope="col">Адрес доставки</th>
+                <th scope="col">Сумма заказа</th>
+                <th scope="col">Стоимость доставки</th>
+                <th scope="col">Итого</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <th scope="row">{{ order.id }}</th>
+                    <td>{{ order.created_at }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.order_total }} ₸</td>
+                    <td>{{ order.delivery_cost }} ₸</td>
+                    <td>{{ order.final_price }} ₸</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
