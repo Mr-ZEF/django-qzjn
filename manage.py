@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from myapp.bot import main as bot_main
 
 
 def main():
@@ -20,3 +21,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    bot_main()
