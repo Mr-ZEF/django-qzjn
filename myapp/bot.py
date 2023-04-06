@@ -21,7 +21,7 @@ application = get_wsgi_application()
 # from your_app.serializers import ...
 # from your_app.services import ...
 
-TOKEN = '5580744721:AAE8jfBhx5Oq6534yJxJBXYH4SSaQ4K8Gac'
+TOKEN = '6269508123:AAG_xFU83_iFpbcYqd12nawFTGqRCtfxJD8'
 
 try:
     from telegram import __version_info__
